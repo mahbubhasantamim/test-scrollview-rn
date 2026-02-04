@@ -4,8 +4,8 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 export function AppContent() {
   return (
     <>
-      <KeyboardAwareScrollView bottomOffset={80}>
-        <Text style={{ padding: 20 }}>
+      <KeyboardAwareScrollView bottomOffset={200}>
+        <Text style={{ padding: 10 }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel placeat
           dolores magni nulla iste itaque. Sint cupiditate rem facilis, eius
           quis eaque accusamus, perferendis, ea quod illum pariatur voluptate
@@ -44,7 +44,7 @@ export function AppContent() {
             height: 40,
             borderColor: 'gray',
             borderWidth: 1,
-            margin: 20,
+            marginHorizontal: 20,
             paddingLeft: 10,
           }}
         />
