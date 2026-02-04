@@ -1,11 +1,13 @@
-import { Text, TextInput, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
+import { OtpInput } from 'react-native-otp-entry';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function AppContent() {
   return (
-    <>
+    <SafeAreaView style={{ flex: 1 }}>
       <KeyboardAwareScrollView bottomOffset={200}>
-        <Text style={{ padding: 10 }}>
+        <Text style={{ padding: 10, fontSize: 16 }}>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel placeat
           dolores magni nulla iste itaque. Sint cupiditate rem facilis, eius
           quis eaque accusamus, perferendis, ea quod illum pariatur voluptate
@@ -38,7 +40,7 @@ export function AppContent() {
           ex quos quam autem laboriosam delectus officia perferendis. Aspernatur
         </Text>
 
-        <TextInput
+        {/* <TextInput
           placeholder="Enter text here"
           style={{
             height: 40,
@@ -47,20 +49,29 @@ export function AppContent() {
             marginHorizontal: 20,
             paddingLeft: 10,
           }}
-        />
+        /> */}
+
+        <View style={{ paddingHorizontal: 20 }}>
+          <OtpInput
+            numberOfDigits={4}
+            onTextChange={text => console.log(text)}
+            type="numeric"
+          />
+        </View>
 
         <TouchableOpacity
           style={{
             backgroundColor: 'blue',
-            padding: 10,
+            paddingVertical: 20,
             margin: 20,
             alignItems: 'center',
+            borderRadius: 10,
           }}
           onPress={() => console.log('Button Pressed!')}
         >
           <Text style={{ color: 'white' }}>Press Me</Text>
         </TouchableOpacity>
       </KeyboardAwareScrollView>
-    </>
+    </SafeAreaView>
   );
 }
