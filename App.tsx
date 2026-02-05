@@ -1,7 +1,7 @@
 import { StatusBar, useColorScheme } from 'react-native';
 import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { AppContent } from './content';
+import AppContent from './content';
 
 export default function App() {
   const isDarkMode = useColorScheme() === 'dark';
