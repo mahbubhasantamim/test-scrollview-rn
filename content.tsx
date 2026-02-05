@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -11,6 +11,7 @@ import {
 import { OtpInput } from 'react-native-otp-entry';
 
 export default function AppContent() {
+  const scrollRef = useRef<ScrollView>(null);
   const [keyboardHeight, setKeyboardHeight] = useState(0);
 
   useEffect(() => {
@@ -32,50 +33,50 @@ export default function AppContent() {
       style={{ flex: 1 }}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      {/* Scrollable content */}
       <ScrollView
-        contentContainerStyle={{ padding: 16, paddingBottom: 140 }}
+        ref={scrollRef}
         keyboardShouldPersistTaps="handled"
+        contentContainerStyle={{
+          flexGrow: 1,
+          padding: 16,
+        }}
       >
         <Text style={{ fontSize: 24, marginBottom: 16 }}>Some Content</Text>
 
-        {Array.from({ length: 25 }).map((_, i) => (
+        {Array.from({ length: 18 }).map((_, i) => (
           <Text key={i} style={{ marginBottom: 12 }}>
-            This is content line {i + 1}
+            Content line {i + 1}
           </Text>
         ))}
-      </ScrollView>
 
-      {/* Input + Submit */}
-      <View
-        style={{
-          padding: 16,
-          backgroundColor: '#fff',
-          borderTopWidth: 1,
-          borderColor: '#eee',
-          marginBottom: keyboardHeight,
-        }}
-      >
-        <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
-          <OtpInput
-            numberOfDigits={4}
-            onTextChange={text => console.log(text)}
-            type="numeric"
-          />
+        <View style={{ flex: 1 }} />
+
+        <View>
+          <View style={{ paddingHorizontal: 20, marginBottom: 16 }}>
+            <OtpInput
+              numberOfDigits={4}
+              onTextChange={text => console.log(text)}
+              type="numeric"
+              onFocus={() => scrollRef.current?.scrollToEnd({ animated: true })}
+            />
+          </View>
+
+          <TouchableOpacity
+            style={{
+              height: 48,
+              borderRadius: 8,
+              backgroundColor: '#000',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            <Text style={{ color: '#fff' }}>Submit</Text>
+          </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={{
-            height: 48,
-            borderRadius: 8,
-            backgroundColor: '#000',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Text style={{ color: '#fff' }}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+        {/* Keyboard spacer */}
+        <View style={{ height: keyboardHeight }} />
+      </ScrollView>
     </KeyboardAvoidingView>
   );
 }
