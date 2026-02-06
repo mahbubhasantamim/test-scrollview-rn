@@ -30,11 +30,11 @@ export default function AppContent() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      behavior={Platform.OS === 'ios' ? undefined : undefined}
     >
       {/* Scrollable content */}
       <ScrollView
-        contentContainerStyle={{ padding: 16, paddingBottom: 140 }}
+        contentContainerStyle={{ padding: 16 }}
         keyboardShouldPersistTaps="handled"
       >
         <Text style={{ fontSize: 24, marginBottom: 16 }}>Some Content</Text>
